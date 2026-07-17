@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Welcome — AI Fitness Dataset Collection{% endblock %}
+{% block step %}STEP 0 / 3{% endblock %}
+{% block content %}
+<section class="hero">
+  <p class="eyebrow">Body Analysis Research Program</p>
+  <h1>AI Fitness Dataset<br>Collection System</h1>
+  <p class="hero__lede">
+    We're building a machine-learning dataset for height, weight, and body
+    analysis models. Volunteers stand for three quick, standardized
+    photos — front, side, and back — captured only once your position,
+    framing, and lighting are validated automatically.
+  </p>
+
+  <div class="hero__grid">
+    <div class="specimen-card">
+      <span class="specimen-card__num">01</span>
+      <h3>Tell us about you</h3>
+      <p>Gender, age, height, weight — the numbers a model learns from.</p>
+    </div>
+    <div class="specimen-card">
+      <span class="specimen-card__num">02</span>
+      <h3>Stand in frame</h3>
+      <p>A live guide checks your position before anything is captured.</p>
+    </div>
+    <div class="specimen-card">
+      <span class="specimen-card__num">03</span>
+      <h3>Three quick shots</h3>
+      <p>Front, side, back. Each one validated, then saved to your ID.</p>
+    </div>
+  </div>
+
+  <a class="button button--primary" href="{{ url_for('form') }}">Start Data Collection</a>
+  <p class="hero__footnote">Your photos are stored under a numeric participant ID, never your name.</p>
+</section>
+{% endblock %}

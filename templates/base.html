@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}AI Fitness Dataset Collection{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="scan-line" aria-hidden="true"></div>
+<header class="topbar">
+  <div class="topbar__mark">
+    <span class="topbar__dot"></span>
+    <span>DATASET&nbsp;COLLECTION</span>
+  </div>
+  <div class="topbar__step">{% block step %}{% endblock %}</div>
+</header>
+<main class="page">
+  {% block content %}{% endblock %}
+</main>
+</body>
+</html>

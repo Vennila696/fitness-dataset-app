@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Complete — AI Fitness Dataset Collection{% endblock %}
+{% block step %}STEP 3 / 3{% endblock %}
+{% block content %}
+<section class="success">
+  <p class="eyebrow">Capture complete</p>
+  <h1>Data collected successfully</h1>
+  <p class="hero__lede">Thank you. Your entry has been added to the dataset under participant ID:</p>
+  <div class="id-badge">{{ participant_id }}</div>
+
+  <div class="thumb-row">
+    {% for src in images %}
+    <div class="thumb-row__item">
+      <img src="{{ src }}" alt="Captured view">
+    </div>
+    {% endfor %}
+  </div>
+
+  <a class="button button--primary" href="{{ url_for('form') }}">Register another participant</a>
+</section>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Camera Capture — AI Fitness Dataset Collection{% endblock %}
+{% block step %}STEP 2 / 3 · ID {{ participant_id }}{% endblock %}
+{% block content %}
+<section class="capture" data-participant-id="{{ raw_id }}" data-view-order="{{ view_order|join(',') }}" data-captured="{{ captured_views|join(',') }}">
+  <p class="eyebrow">Live Capture · Participant {{ participant_id }}</p>
+  <h1>Stand inside the frame</h1>
+
+  <div class="capture__layout">
+    <div class="camera-stage">
+      <video id="video" autoplay playsinline muted></video>
+      <canvas id="overlay"></canvas>
+      <canvas id="capture-canvas" hidden></canvas>
+      <div class="camera-stage__instructions" id="instructions">Starting camera…</div>
+    </div>
+
+    <aside class="readout">
+      <div class="readout__block">
+        <span class="readout__label">Current view</span>
+        <span class="readout__value" id="current-view-label">FRONT</span>
+      </div>
+
+      <div class="readout__block">
+        <span class="readout__label">Sequence</span>
+        <ol class="sequence" id="sequence-list">
+          <li data-view="front">Front</li>
+          <li data-view="side">Side</li>
+          <li data-view="back">Back</li>
+        </ol>
+      </div>
+
+      <div class="readout__block">
+        <span class="readout__label">Status</span>
+        <ul class="checklist" id="checklist">
+          <li data-check="person_detected">Body detected</li>
+          <li data-check="full_body_visible">Full body visible</li>
+          <li data-check="inside_frame">Inside frame</li>
+          <li data-check="centered">Centered on guide</li>
+          <li data-check="good_distance">Distance okay</li>
+          <li data-check="good_lighting">Lighting okay</li>
+          <li data-check="matches_view">Matches requested pose</li>
+        </ul>
+      </div>
+
+      <div class="readout__block">
+        <span class="readout__label">Guidance</span>
+        <p class="guidance" id="guidance-text">Point the camera at yourself and step back.</p>
+      </div>
+
+      <button id="capture-btn" class="button button--primary button--full" disabled>Capture front</button>
+      <p class="readout__footnote">Images save automatically once validated — no need to hold still after the check turns green.</p>
+    </aside>
+  </div>
+</section>
+
+<script src="{{ url_for('static', filename='js/camera.js') }}"></script>
+{% endblock %}
