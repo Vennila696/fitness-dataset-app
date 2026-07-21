@@ -1,2 +1,7 @@
+[project]
+name = "fitness-dataset-app"
+version = "0.1.0"
+requires-python = ">=3.13"
+
 [tool.vercel]
 entrypoint = "backend.app:app"
