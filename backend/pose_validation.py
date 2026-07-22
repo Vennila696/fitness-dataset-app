@@ -37,11 +37,17 @@ mp_pose = mp.solutions.pose
 # session instead.
 _pose = mp_pose.Pose(
     static_image_mode=False,
-    model_complexity=1,
+    model_complexity=0,
     enable_segmentation=False,
     min_detection_confidence=0.5,
     min_tracking_confidence=0.5,
 )
+
+# Preview frames are downscaled to this max width before running Pose.
+# Full-resolution frames aren't needed for the framing/lighting checks,
+# and processing a smaller image uses far less memory and CPU per
+# request -- important on memory-constrained free-tier hosting.
+MAX_FRAME_WIDTH = 480
 
 VISIBILITY_THRESHOLD = 0.5
 KEY_LANDMARKS = {
@@ -72,6 +78,10 @@ def validate_pose_frame(frame_bytes, view="front"):
         return {"ok": False, "messages": ["Could not read frame"], "landmarks_detected": 0, "checks": {}}
 
     height, width = image.shape[:2]
+    if width > MAX_FRAME_WIDTH:
+        scale = MAX_FRAME_WIDTH / width
+        image = cv2.resize(image, (MAX_FRAME_WIDTH, int(height * scale)), interpolation=cv2.INTER_AREA)
+        height, width = image.shape[:2]
     rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     results = _pose.process(rgb)
 

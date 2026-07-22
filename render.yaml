@@ -4,7 +4,7 @@ services:
     runtime: python
     plan: free
     buildCommand: "pip install -r backend/requirements.txt"
-    startCommand: "gunicorn --chdir backend app:app --workers 1 --timeout 120"
+    startCommand: "gunicorn --chdir backend app:app --workers 1 --threads 1 --timeout 120 --max-requests 100 --max-requests-jitter 20"
     envVars:
       - key: PYTHON_VERSION
         value: 3.12.7
